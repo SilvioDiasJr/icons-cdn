@@ -79,12 +79,37 @@ npx tsx scripts/normalize-pack.ts food
 
 ## Instalação nos projetos
 
-Adicione um `.npmrc` na raiz do projeto consumidor:
+Os pacotes são publicados no **GitHub Packages** e exigem autenticação. Escolha uma das opções abaixo.
+
+### Opção A — `.npmrc` no projeto (recomendado para CI/CD)
+
+Crie (ou edite) o `.npmrc` na raiz do projeto consumidor:
 
 ```
-//npm.pkg.github.com/:_authToken=SEU_TOKEN
 @silviodiasjr:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
+
+> O `${GITHUB_TOKEN}` é lido do ambiente em tempo de instalação — nunca commite o token diretamente.  
+> Em pipelines (GitHub Actions, etc.) o `GITHUB_TOKEN` já está disponível automaticamente.  
+> Localmente, exporte a variável antes de rodar `install`:
+> ```bash
+> export GITHUB_TOKEN=ghp_seu_token_aqui   # Linux/macOS
+> $env:GITHUB_TOKEN="ghp_seu_token_aqui"   # PowerShell
+> ```
+> O token precisa ter pelo menos a permissão **`read:packages`**.  
+> Gere um em: **GitHub → Settings → Developer settings → Personal access tokens**.
+
+### Opção B — login manual (dev local, sem arquivo)
+
+```bash
+npm login --registry=https://npm.pkg.github.com --scope=@silviodiasjr
+# Informe: usuário GitHub, token como senha, e-mail
+```
+
+Após o login, o npm armazena a credencial globalmente e qualquer projeto que referencie `@silviodiasjr` no escopo correto funciona sem `.npmrc` adicional.
+
+---
 
 Instale o pacote correspondente à plataforma:
 
@@ -196,6 +221,7 @@ clearCache('food');      // limpa apenas o pack food
 |---------|-----------|
 | `pnpm build` | Build de todos os packages via Turborepo |
 | `pnpm dev` | Watch mode (rebuilda ao salvar) |
+| `pnpm test` | Roda todos os testes unitários (71 testes) |
 | `pnpm typecheck` | Checa tipos em todos os packages |
 | `pnpm clean` | Remove todos os `dist/` |
 | `pnpm publish:core` | Publica `@silviodiasjr/icons-core` no GitHub Packages |
