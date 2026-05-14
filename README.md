@@ -83,28 +83,36 @@ npx tsx scripts/normalize-pack.ts food
 
 **1. Autenticação** (apenas uma vez por máquina/pipeline)
 
-Os pacotes ficam no GitHub Packages e exigem autenticação. Escolha uma forma:
+Os pacotes ficam no GitHub Packages e exigem autenticação.
 
-_Opção A — `.npmrc` no projeto (recomendado para CI/CD)_
-
-Crie `.npmrc` na raiz do projeto consumidor:
-
-```
-@silviodiasjr:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
-
-> Nunca commite o token diretamente. Use a variável de ambiente `GITHUB_TOKEN` (lida em tempo de install).  
-> Em pipelines GitHub Actions o `GITHUB_TOKEN` já está disponível automaticamente.  
-> Localmente, defina antes de rodar o install:
-> ```bash
-> export GITHUB_TOKEN=ghp_seu_token_aqui   # Linux/macOS
-> $env:GITHUB_TOKEN="ghp_seu_token_aqui"   # PowerShell
-> ```
 > Gere um token com permissão **`read:packages`** em:  
 > **GitHub → Settings → Developer settings → Personal access tokens**.
 
-_Opção B — login manual (dev local, sem arquivo)_
+_npm ou pnpm — `.npmrc` na raiz do projeto consumidor:_
+
+```
+@silviodiasjr:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=ghp_seu_token_aqui
+```
+
+_Yarn 1 — requer dois arquivos separados:_
+
+`.yarnrc` (registry):
+```
+"@silviodiasjr:registry" "https://npm.pkg.github.com"
+strict-ssl false
+```
+
+`.npmrc` (token — o Yarn 1 lê auth daqui, não do `.yarnrc`):
+```
+//npm.pkg.github.com/:_authToken=ghp_seu_token_aqui
+```
+
+> Em CI/CD substitua o token literal pela variável de ambiente:  
+> `.npmrc` → `//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}`  
+> Nunca commite o token diretamente no repositório.
+
+_Login manual (dev local, sem arquivos):_
 
 ```bash
 npm login --registry=https://npm.pkg.github.com --scope=@silviodiasjr
@@ -142,7 +150,7 @@ export default function App() {
 
 **1. Autenticação**
 
-Mesmas opções A e B descritas acima.
+Mesmas configurações de `.npmrc` / `.yarnrc` descritas na seção web acima.
 
 **2. Instalar o pacote e a peer dependency**
 
