@@ -77,37 +77,59 @@ npx tsx scripts/normalize-pack.ts food
 
 ---
 
+## Instalação nos projetos
+
+Adicione um `.npmrc` na raiz do projeto consumidor:
+
+```
+//npm.pkg.github.com/:_authToken=SEU_TOKEN
+@silviodiasjr:registry=https://npm.pkg.github.com
+```
+
+Instale o pacote correspondente à plataforma:
+
+```bash
+# React web
+yarn add @silviodiasjr/icons-web
+
+# React Native / Expo
+yarn add @silviodiasjr/icons-native
+npx expo install react-native-svg   # ou: yarn add react-native-svg
+```
+
+---
+
 ## Uso — React web
 
 ```tsx
-import { Icon, preloadIcons } from '@icons/web';
+import { Icon, preloadIcons } from '@silviodiasjr/icons-web'
 
 // Preload opcional (ex: antes de mostrar a tela)
-preloadIcons([{ pack: 'food', icons: ['burger', 'pizza-1'] }]);
+preloadIcons([{ pack: 'food', icons: ['burger', 'pizza-1'] }])
 
 export default function App() {
   return (
     <Icon pack="food" name="burger" size={32} color="#FF6B35" />
-  );
+  )
 }
 ```
 
 ## Uso — React Native / Expo
 
 ```tsx
-import * as SplashScreen from 'expo-splash-screen';
-import { Icon, preloadIcons } from '@icons/native';
+import * as SplashScreen from 'expo-splash-screen'
+import { Icon, preloadIcons } from '@silviodiasjr/icons-native'
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 preloadIcons([
   { pack: 'food', icons: ['burger', 'pizza-1', 'donut'] },
-]).finally(() => SplashScreen.hideAsync());
+]).finally(() => SplashScreen.hideAsync())
 
 export default function App() {
   return (
     <Icon pack="food" name="ice-cream-2" size={32} color="#FF6B35" />
-  );
+  )
 }
 ```
 
@@ -136,7 +158,7 @@ A tipagem de `name` é **estritamente inferida** a partir do `pack` informado. S
 - Cache sobrevive à remontagem do componente.
 
 ```ts
-import { clearCache, getCacheSize } from '@icons/web'; // ou @icons/native
+import { clearCache, getCacheSize } from '@silviodiasjr/icons-web' // ou @silviodiasjr/icons-native
 
 getCacheSize();          // número de ícones em cache
 clearCache();            // limpa tudo
@@ -176,3 +198,13 @@ clearCache('food');      // limpa apenas o pack food
 | `pnpm dev` | Watch mode (rebuilda ao salvar) |
 | `pnpm typecheck` | Checa tipos em todos os packages |
 | `pnpm clean` | Remove todos os `dist/` |
+| `pnpm publish:core` | Publica `@silviodiasjr/icons-core` no GitHub Packages |
+| `pnpm publish:web` | Publica `@silviodiasjr/icons-web` no GitHub Packages |
+| `pnpm publish:native` | Publica `@silviodiasjr/icons-native` no GitHub Packages |
+| `pnpm publish:all` | Build + publica os três pacotes em ordem |
+
+> Antes de publicar, bumpe a versão nos `package.json` dos pacotes alterados:
+> ```bash
+> cd packages/web && npm version patch   # 0.2.0 → 0.2.1
+> cd packages/core && npm version minor  # 0.1.0 → 0.2.0
+> ```
