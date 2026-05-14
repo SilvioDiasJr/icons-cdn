@@ -1,6 +1,6 @@
 {
-  "name": "@icons/web",
-  "version": "0.1.0",
+  "name": "@silviodiasjr/icons-web",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -11,14 +11,24 @@
       "require": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilvioDiasJr/icons-cdn.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
+    "prepare": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch --external react",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@icons/core": "workspace:*"
+    "@silviodiasjr/icons-core": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18",

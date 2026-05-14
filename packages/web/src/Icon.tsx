@@ -1,6 +1,6 @@
-import React, { CSSProperties } from 'react';
-import { useIcon } from '@icons/core';
-import type { PackName, IconProps } from '@icons/core';
+import React, { CSSProperties } from 'react'
+import { useIcon } from '@silviodiasjr/icons-core'
+import type { PackName, IconProps } from '@silviodiasjr/icons-core'
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
@@ -8,16 +8,16 @@ const spinnerKeyframes = `
 @keyframes __icons_spin {
   to { transform: rotate(360deg); }
 }
-`;
+`
 
-let stylesInjected = false;
+let stylesInjected = false
 
 function ensureStyles() {
-  if (stylesInjected || typeof document === 'undefined') return;
-  const style = document.createElement('style');
-  style.textContent = spinnerKeyframes;
-  document.head.appendChild(style);
-  stylesInjected = true;
+  if (stylesInjected || typeof document === 'undefined') return
+  const style = document.createElement('style')
+  style.textContent = spinnerKeyframes
+  document.head.appendChild(style)
+  stylesInjected = true
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -30,9 +30,9 @@ export function Icon<P extends PackName>({
   style,
   onError,
 }: IconProps<P>) {
-  ensureStyles();
+  ensureStyles()
 
-  const result = useIcon(pack, name, color, onError);
+  const result = useIcon(pack, name, color, onError)
 
   const containerStyle: CSSProperties = {
     width: size,
@@ -42,13 +42,13 @@ export function Icon<P extends PackName>({
     justifyContent: 'center',
     flexShrink: 0,
     ...(style as CSSProperties),
-  };
+  }
 
   // ── Error state: bordered placeholder ──
   if (result.status === 'error') {
     return (
       <div
-        role="img"
+        role='img'
         aria-label={`${pack}/${String(name)} (failed to load)`}
         style={{
           ...containerStyle,
@@ -58,14 +58,14 @@ export function Icon<P extends PackName>({
           boxSizing: 'border-box',
         }}
       />
-    );
+    )
   }
 
   // ── Loading state: CSS spinner, no external deps ──
   if (result.status === 'loading') {
     return (
       <div
-        role="img"
+        role='img'
         aria-label={`${pack}/${String(name)} (loading)`}
         style={containerStyle}
       >
@@ -81,18 +81,21 @@ export function Icon<P extends PackName>({
           }}
         />
       </div>
-    );
+    )
   }
 
   // ── Ready: inline SVG ──
+  const svg = result.xml.replace(/<svg\b([^>]*)>/i, (_, attrs: string) =>
+    `<svg${attrs} width="${size}" height="${size}">`)
+
   return (
     <div
-      role="img"
+      role='img'
       aria-label={`${pack}/${String(name)}`}
       style={containerStyle}
       // SVG content is our own fetched markup; no user-generated content risk.
       // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: result.xml }}
+      dangerouslySetInnerHTML={{ __html: svg }}
     />
-  );
+  )
 }

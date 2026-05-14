@@ -5,7 +5,11 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "typecheck": "turbo typecheck",
-    "clean": "turbo clean && find . -name 'dist' -not -path '*/node_modules/*' | xargs rm -rf"
+    "clean": "turbo clean && find . -name 'dist' -not -path '*/node_modules/*' | xargs rm -rf",
+    "publish:core": "cd packages/core && npm publish",
+    "publish:web": "cd packages/web && npm publish",
+    "publish:native": "cd packages/native && npm publish",
+    "publish:all": "pnpm build && pnpm run publish:core && pnpm run publish:web && pnpm run publish:native"
   },
   "devDependencies": {
     "turbo": "^2.0.0",

@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { useIcon } from '@icons/core';
-import type { PackName, IconProps } from '@icons/core';
+import React from 'react'
+import { View, ActivityIndicator, StyleSheet } from 'react-native'
+import { SvgXml } from 'react-native-svg'
+import { useIcon } from '@silviodiasjr/icons-core'
+import type { PackName, IconProps } from '@silviodiasjr/icons-core'
 
 export function Icon<P extends PackName>({
   pack,
@@ -12,7 +12,7 @@ export function Icon<P extends PackName>({
   style,
   onError,
 }: IconProps<P>) {
-  const result = useIcon(pack, name, color, onError);
+  const result = useIcon(pack, name, color, onError)
 
   // ── Error state: bordered placeholder ──
   if (result.status === 'error') {
@@ -31,7 +31,7 @@ export function Icon<P extends PackName>({
           style as object,
         ]}
       />
-    );
+    )
   }
 
   // ── Loading state: ActivityIndicator ──
@@ -39,11 +39,7 @@ export function Icon<P extends PackName>({
     return (
       <View
         accessibilityLabel={`${pack}/${String(name)} (loading)`}
-        style={[
-          styles.center,
-          { width: size, height: size },
-          style as object,
-        ]}
+        style={[styles.center, { width: size, height: size }, style as object]}
       >
         <ActivityIndicator
           size={size > 32 ? 'large' : 'small'}
@@ -51,7 +47,7 @@ export function Icon<P extends PackName>({
           style={{ opacity: 0.35 }}
         />
       </View>
-    );
+    )
   }
 
   // ── Ready: rendered SVG ──
@@ -63,7 +59,7 @@ export function Icon<P extends PackName>({
       style={style as object}
       accessibilityLabel={`${pack}/${String(name)}`}
     />
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -74,4 +70,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

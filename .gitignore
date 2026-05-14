@@ -3,3 +3,4 @@ dist/
 cdn/packs/
 .turbo/
 *.log
+.npmrc

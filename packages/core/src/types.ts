@@ -112,16 +112,10 @@ export type PackName = keyof PackIconMap;
 // ─── Shared Icon Props ───────────────────────────────────────────────────────
 
 export type IconProps<P extends PackName> = {
-  /** Which icon pack to use */
   pack: P;
-  /** Icon name — strictly typed per pack */
   name: PackIconMap[P];
-  /** Rendered size in px (default: 24) */
   size?: number;
-  /** Icon color — any valid CSS color string (default: '#000000') */
   color?: string;
-  /** Additional styles forwarded to the container */
   style?: object;
-  /** Called when the icon fails to load */
   onError?: (pack: string, name: string) => void;
 };
