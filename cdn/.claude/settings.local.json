@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\trabalho\\\\progway\\\\Active\\\\icons\" -Depth 0 | Where-Object { $_.Name -ne 'node_modules' } | Select-Object Name)",
+      "PowerShell(Get-ChildItem \"C:\\\\trabalho\\\\progway\\\\Active\\\\icons\" | Where-Object { $_.Name -ne 'node_modules' } | Select-Object Name, PSIsContainer)"
+    ]
+  }
+}

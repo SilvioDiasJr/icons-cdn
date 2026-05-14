@@ -1,0 +1,12 @@
+{
+  "name": "@icons/cdn",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "normalize": "tsx scripts/normalize-pack.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "typescript": "^5.4.0"
+  }
+}
