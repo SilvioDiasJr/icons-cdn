@@ -77,59 +77,56 @@ npx tsx scripts/normalize-pack.ts food
 
 ---
 
-## Instalação nos projetos
+## Usando em projetos consumidores
 
-Os pacotes são publicados no **GitHub Packages** e exigem autenticação. Escolha uma das opções abaixo.
+### React web — passo a passo
 
-### Opção A — `.npmrc` no projeto (recomendado para CI/CD)
+**1. Autenticação** (apenas uma vez por máquina/pipeline)
 
-Crie (ou edite) o `.npmrc` na raiz do projeto consumidor:
+Os pacotes ficam no GitHub Packages e exigem autenticação. Escolha uma forma:
+
+_Opção A — `.npmrc` no projeto (recomendado para CI/CD)_
+
+Crie `.npmrc` na raiz do projeto consumidor:
 
 ```
 @silviodiasjr:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
-> O `${GITHUB_TOKEN}` é lido do ambiente em tempo de instalação — nunca commite o token diretamente.  
-> Em pipelines (GitHub Actions, etc.) o `GITHUB_TOKEN` já está disponível automaticamente.  
-> Localmente, exporte a variável antes de rodar `install`:
+> Nunca commite o token diretamente. Use a variável de ambiente `GITHUB_TOKEN` (lida em tempo de install).  
+> Em pipelines GitHub Actions o `GITHUB_TOKEN` já está disponível automaticamente.  
+> Localmente, defina antes de rodar o install:
 > ```bash
 > export GITHUB_TOKEN=ghp_seu_token_aqui   # Linux/macOS
 > $env:GITHUB_TOKEN="ghp_seu_token_aqui"   # PowerShell
 > ```
-> O token precisa ter pelo menos a permissão **`read:packages`**.  
-> Gere um em: **GitHub → Settings → Developer settings → Personal access tokens**.
+> Gere um token com permissão **`read:packages`** em:  
+> **GitHub → Settings → Developer settings → Personal access tokens**.
 
-### Opção B — login manual (dev local, sem arquivo)
+_Opção B — login manual (dev local, sem arquivo)_
 
 ```bash
 npm login --registry=https://npm.pkg.github.com --scope=@silviodiasjr
 # Informe: usuário GitHub, token como senha, e-mail
 ```
 
-Após o login, o npm armazena a credencial globalmente e qualquer projeto que referencie `@silviodiasjr` no escopo correto funciona sem `.npmrc` adicional.
-
----
-
-Instale o pacote correspondente à plataforma:
+**2. Instalar o pacote**
 
 ```bash
-# React web
+npm install @silviodiasjr/icons-web
+# ou
 yarn add @silviodiasjr/icons-web
-
-# React Native / Expo
-yarn add @silviodiasjr/icons-native
-npx expo install react-native-svg   # ou: yarn add react-native-svg
+# ou
+pnpm add @silviodiasjr/icons-web
 ```
 
----
-
-## Uso — React web
+**3. Usar o componente**
 
 ```tsx
 import { Icon, preloadIcons } from '@silviodiasjr/icons-web'
 
-// Preload opcional (ex: antes de mostrar a tela)
+// Preload opcional — antecipa o fetch antes de montar a tela
 preloadIcons([{ pack: 'food', icons: ['burger', 'pizza-1'] }])
 
 export default function App() {
@@ -139,7 +136,44 @@ export default function App() {
 }
 ```
 
-## Uso — React Native / Expo
+---
+
+### React Native / Expo — passo a passo
+
+**1. Autenticação**
+
+Mesmas opções A e B descritas acima.
+
+**2. Instalar o pacote e a peer dependency**
+
+```bash
+# Instalar a biblioteca
+npm install @silviodiasjr/icons-native
+# ou
+yarn add @silviodiasjr/icons-native
+
+# Instalar react-native-svg (peer dependency obrigatória)
+npx expo install react-native-svg   # Expo (versão compatível automática)
+# ou
+yarn add react-native-svg           # React Native puro
+```
+
+> Em projetos **Expo Go** / managed workflow nenhuma configuração extra é necessária.  
+> Em projetos **bare workflow** rode `npx pod-install` após instalar o `react-native-svg`.
+
+**3. Usar o componente**
+
+```tsx
+import { Icon, preloadIcons } from '@silviodiasjr/icons-native'
+
+export default function App() {
+  return (
+    <Icon pack="food" name="ice-cream-2" size={32} color="#FF6B35" />
+  )
+}
+```
+
+Com preload na splash screen (Expo):
 
 ```tsx
 import * as SplashScreen from 'expo-splash-screen'
