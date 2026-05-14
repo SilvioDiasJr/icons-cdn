@@ -4,3 +4,8 @@ cdn/packs/
 .turbo/
 *.log
 .npmrc
+.yarnrc
+
+#Claude
+.claude
+cdn/.claude/
