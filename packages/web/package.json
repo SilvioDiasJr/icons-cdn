@@ -25,7 +25,9 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
     "prepare": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch --external react",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -33,9 +35,16 @@
   },
   "devDependencies": {
     "@silviodiasjr/icons-core": "workspace:*",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^16.0.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.0.0",
+    "happy-dom": "^13.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
   }
 }

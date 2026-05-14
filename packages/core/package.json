@@ -25,12 +25,20 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "prepare": "tsup src/index.ts --format cjs,esm --dts --clean",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "happy-dom": "^13.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",
-    "@types/react": "^18"
+    "vitest": "^2.0.0"
   },
   "peerDependencies": {
     "react": ">=18"
