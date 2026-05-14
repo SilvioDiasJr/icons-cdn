@@ -3,6 +3,7 @@ export {
   preloadIcons,
   clearCache,
   getCacheSize,
+  PACK_ICONS,
 } from '@silviodiasjr/icons-core'
 export type {
   IconProps,

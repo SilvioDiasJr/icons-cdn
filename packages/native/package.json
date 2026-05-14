@@ -1,6 +1,6 @@
 {
   "name": "@silviodiasjr/icons-native",
-  "version": "0.2.0",
+  "version": "0.6.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -27,15 +27,13 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch --external react-native,react-native-svg",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "@silviodiasjr/icons-core": "workspace:*"
-  },
   "peerDependencies": {
     "react": ">=18",
     "react-native": ">=0.73",
     "react-native-svg": ">=14"
   },
   "devDependencies": {
+    "@silviodiasjr/icons-core": "workspace:*",
     "@types/react": "^18",
     "@types/react-native": "^0.73",
     "tsup": "^8.0.0",

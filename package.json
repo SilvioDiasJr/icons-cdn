@@ -9,7 +9,10 @@
     "publish:core": "cd packages/core && npm publish",
     "publish:web": "cd packages/web && npm publish",
     "publish:native": "cd packages/native && npm publish",
-    "publish:all": "pnpm build && pnpm run publish:core && pnpm run publish:web && pnpm run publish:native"
+    "publish:all": "pnpm build && pnpm run publish:core && pnpm run publish:web && pnpm run publish:native",
+    "version:patch": "npm version patch --prefix packages/core && npm version patch --prefix packages/web && npm version patch --prefix packages/native",
+    "version:minor": "npm version minor --prefix packages/core && npm version minor --prefix packages/web && npm version minor --prefix packages/native",
+    "version:major": "npm version major --prefix packages/core && npm version major --prefix packages/web && npm version major --prefix packages/native"
   },
   "devDependencies": {
     "turbo": "^2.0.0",
