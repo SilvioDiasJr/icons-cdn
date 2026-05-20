@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
 import { useIcon } from '@silviodiasjr/icons-core'
-import type { PackName, IconProps } from '@silviodiasjr/icons-core'
+import type { IconProps } from '@silviodiasjr/icons-core'
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
@@ -22,14 +22,14 @@ function ensureStyles() {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export function Icon<P extends PackName>({
+export function Icon({
   pack,
   name,
   size = 24,
   color = '#000000',
   style,
   onError,
-}: IconProps<P>) {
+}: IconProps) {
   ensureStyles()
 
   const result = useIcon(pack, name, color, onError)

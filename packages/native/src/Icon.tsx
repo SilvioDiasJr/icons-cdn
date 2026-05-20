@@ -2,16 +2,16 @@ import React from 'react'
 import { View, ActivityIndicator, StyleSheet } from 'react-native'
 import { SvgXml } from 'react-native-svg'
 import { useIcon } from '@silviodiasjr/icons-core'
-import type { PackName, IconProps } from '@silviodiasjr/icons-core'
+import type { IconProps } from '@silviodiasjr/icons-core'
 
-export function Icon<P extends PackName>({
+export function Icon({
   pack,
   name,
   size = 24,
   color = '#000000',
   style,
   onError,
-}: IconProps<P>) {
+}: IconProps) {
   const result = useIcon(pack, name, color, onError)
 
   // ── Error state: bordered placeholder ──

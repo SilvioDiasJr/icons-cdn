@@ -111,11 +111,18 @@ export type PackName = keyof PackIconMap;
 
 // ─── Shared Icon Props ───────────────────────────────────────────────────────
 
-export type IconProps<P extends PackName> = {
-  pack: P;
-  name: PackIconMap[P];
-  size?: number;
-  color?: string;
-  style?: object;
-  onError?: (pack: string, name: string) => void;
+type _IconPropsMap = {
+  [P in PackName]: {
+    pack: P;
+    name: PackIconMap[P];
+    size?: number;
+    color?: string;
+    style?: object;
+    onError?: (pack: string, name: string) => void;
+  };
 };
+
+// Indexed access over a mapped type: `IconProps` (no arg) produces a
+// discriminated union per pack — IDEs narrow `name` once `pack` is set.
+// `IconProps<'food'>` still works for explicit per-pack typing.
+export type IconProps<P extends PackName = PackName> = _IconPropsMap[P];

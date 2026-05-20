@@ -1,6 +1,6 @@
 {
   "name": "@silviodiasjr/icons-web",
-  "version": "0.6.0",
+  "version": "0.6.3",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -29,12 +29,14 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "dependencies": {
+    "@silviodiasjr/icons-core": "workspace:^0.6.1"
+  },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@silviodiasjr/icons-core": "workspace:*",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18",

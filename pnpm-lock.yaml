@@ -56,6 +56,9 @@ importers:
 
   packages/native:
     dependencies:
+      '@silviodiasjr/icons-core':
+        specifier: workspace:^0.6.1
+        version: link:../core
       react-native:
         specifier: '>=0.73'
         version: 0.85.3(@babel/core@7.29.0)(@types/react@18.3.28)(react@18.3.1)
@@ -63,9 +66,6 @@ importers:
         specifier: '>=14'
         version: 15.15.5(react-native@0.85.3(@babel/core@7.29.0)(@types/react@18.3.28)(react@18.3.1))(react@18.3.1)
     devDependencies:
-      '@silviodiasjr/icons-core':
-        specifier: workspace:*
-        version: link:../core
       '@testing-library/jest-dom':
         specifier: ^6.0.0
         version: 6.9.1
@@ -104,10 +104,11 @@ importers:
         version: 2.1.9(@types/node@25.7.0)(happy-dom@13.10.1)(terser@5.47.1)
 
   packages/web:
-    devDependencies:
+    dependencies:
       '@silviodiasjr/icons-core':
-        specifier: workspace:*
+        specifier: workspace:^0.6.1
         version: link:../core
+    devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.0.0
         version: 6.9.1
