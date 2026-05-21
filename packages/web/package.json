@@ -1,6 +1,6 @@
 {
   "name": "@silviodiasjr/icons-web",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@silviodiasjr/icons-core": "workspace:^0.7.0"
+    "@silviodiasjr/icons-core": "workspace:^0.7.1"
   },
   "peerDependencies": {
     "react": ">=18",
