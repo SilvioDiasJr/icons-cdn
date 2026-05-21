@@ -1,6 +1,6 @@
-{
+﻿{
   "name": "@silviodiasjr/icons-native",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@silviodiasjr/icons-core": "workspace:^0.7.1"
+    "@silviodiasjr/icons-core": "workspace:^0.7.2"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -52,3 +52,4 @@
     "vitest": "^2.0.0"
   }
 }
+
