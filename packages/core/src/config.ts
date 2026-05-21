@@ -3,7 +3,7 @@
  * Replace SEU_USER with your GitHub username / org that owns icons-cdn.
  */
 export const CDN_BASE_URL =
-  'https://cdn.jsdelivr.net/gh/SilvioDiasJr/icons-cdn@main'
+  'https://cdn.jsdelivr.net/gh/SilvioDiasJr/icons-cdn@v1.0.0'
 
 export const DEFAULT_SIZE = 24
 
