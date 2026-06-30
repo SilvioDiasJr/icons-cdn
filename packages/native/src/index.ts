@@ -4,6 +4,7 @@ export {
   clearCache,
   getCacheSize,
   PACK_ICONS,
+  configureCDN,
 } from '@silviodiasjr/icons-core'
 export type {
   IconProps,

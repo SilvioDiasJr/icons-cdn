@@ -5,7 +5,7 @@ export type { FoodIconName, PackIconMap, PackName, IconProps } from './types';
 export { PACK_ICONS } from './packs';
 
 // Config
-export { CDN_BASE_URL, DEFAULT_SIZE, DEFAULT_COLOR } from './config';
+export { CDN_BASE_URL, DEFAULT_SIZE, DEFAULT_COLOR, configureCDN } from './config';
 
 // Cache
 export {

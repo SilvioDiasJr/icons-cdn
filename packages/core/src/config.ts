@@ -1,10 +1,10 @@
-/**
- * Base URL for the CDN that serves normalized SVG icons.
- * Replace SEU_USER with your GitHub username / org that owns icons-cdn.
- */
-export const CDN_BASE_URL =
+export let CDN_BASE_URL =
   'https://cdn.jsdelivr.net/gh/SilvioDiasJr/icons-cdn@v1.0.0'
 
 export const DEFAULT_SIZE = 24
 
 export const DEFAULT_COLOR = '#000000'
+
+export function configureCDN(baseUrl: string): void {
+  CDN_BASE_URL = baseUrl.replace(/\/$/, '')
+}

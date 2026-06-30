@@ -1,6 +1,6 @@
-﻿{
+{
   "name": "@silviodiasjr/icons-native",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -52,5 +52,3 @@
     "vitest": "^2.0.0"
   }
 }
-
-
