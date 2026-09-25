@@ -19,7 +19,7 @@
     "url": "git+https://github.com/SilvioDiasJr/icons-cdn.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
