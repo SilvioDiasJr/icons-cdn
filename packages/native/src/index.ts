@@ -5,10 +5,12 @@ export {
   getCacheSize,
   PACK_ICONS,
   configureCDN,
+  configureStorage,
 } from '@silviodiasjr/icons-core'
 export type {
   IconProps,
   PackName,
   FoodIconName,
   PackIconMap,
+  IconStorage,
 } from '@silviodiasjr/icons-core'

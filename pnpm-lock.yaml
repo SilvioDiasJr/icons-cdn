@@ -57,7 +57,7 @@ importers:
   packages/native:
     dependencies:
       '@silviodiasjr/icons-core':
-        specifier: workspace:^0.7.3
+        specifier: workspace:^0.8.0
         version: link:../core
       react-native:
         specifier: '>=0.73'
@@ -106,7 +106,7 @@ importers:
   packages/web:
     dependencies:
       '@silviodiasjr/icons-core':
-        specifier: workspace:^0.7.3
+        specifier: workspace:^0.8.0
         version: link:../core
     devDependencies:
       '@testing-library/jest-dom':

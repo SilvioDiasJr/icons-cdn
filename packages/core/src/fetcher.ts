@@ -6,11 +6,14 @@ import {
   setPending,
   clearPending,
 } from './cache';
+import { readPersisted, writePersisted } from './storage';
 
 /**
  * Fetches an SVG icon from the CDN.
  *
  * - Returns from cache immediately if already loaded.
+ * - Falls back to the persistent storage (see `configureStorage`) before the network,
+ *   so icons keep working offline after the first successful download.
  * - Deduplicates concurrent requests for the same icon (only 1 HTTP call).
  * - Stores the raw SVG (with `currentColor`) in cache for reuse across colors.
  */
@@ -23,18 +26,8 @@ export async function fetchIcon(pack: string, name: string): Promise<string> {
   const pending = getPending(pack, name);
   if (pending !== undefined) return pending;
 
-  // 3. Start fetch
-  const url = `${CDN_BASE_URL}/${pack}/${name}.svg`;
-
-  const promise = fetch(url)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(
-          `[icons] Failed to fetch ${pack}/${name}: ${res.status} ${res.statusText}`
-        );
-      }
-      return res.text();
-    })
+  // 3. Disk (offline) → network
+  const promise = loadIcon(pack, name)
     .then((xml) => {
       setCached(pack, name, xml);
       clearPending(pack, name);
@@ -47,6 +40,22 @@ export async function fetchIcon(pack: string, name: string): Promise<string> {
 
   setPending(pack, name, promise);
   return promise;
+}
+
+async function loadIcon(pack: string, name: string): Promise<string> {
+  const persisted = await readPersisted(pack, name);
+  if (persisted !== undefined) return persisted;
+
+  const url = `${CDN_BASE_URL}/${pack}/${name}.svg`;
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(
+      `[icons] Failed to fetch ${pack}/${name}: ${res.status} ${res.statusText}`
+    );
+  }
+  const xml = await res.text();
+  await writePersisted(pack, name, xml);
+  return xml;
 }
 
 // ─── Preload ─────────────────────────────────────────────────────────────────

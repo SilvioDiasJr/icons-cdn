@@ -7,6 +7,10 @@ export { PACK_ICONS } from './packs';
 // Config
 export { CDN_BASE_URL, DEFAULT_SIZE, DEFAULT_COLOR, configureCDN } from './config';
 
+// Storage (persistência opcional)
+export { configureStorage } from './storage';
+export type { IconStorage } from './storage';
+
 // Cache
 export {
   getCached,
